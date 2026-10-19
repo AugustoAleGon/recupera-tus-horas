@@ -1,0 +1,11 @@
+---
+import { slides } from '../data/presentation';
+interface Props { number: number; variant?: string; }
+const { number, variant = '' } = Astro.props;
+const slide = slides[number - 1];
+---
+<section class:list={['slide', variant, { active: number === 1 }]} id={`slide-${number}`} data-slide={number} data-title={slide.title} data-section={slide.section} data-seconds={slide.seconds} aria-label={`${number} de ${slides.length}: ${slide.title}`} aria-roledescription="diapositiva" tabindex="-1">
+  <slot />
+  <div class="slide-footer"><span>Augusto González</span><span>{String(number).padStart(2, '0')} / {slides.length}</span></div>
+  <template class="speaker-note">{slide.notes}</template>
+</section>
