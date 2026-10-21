@@ -1,3 +1,6 @@
+import { createPresenterChannel } from './presenter-channel';
+
+const isPreview = new URLSearchParams(location.search).get('view') === 'preview';
 const slides = [...document.querySelectorAll<HTMLElement>('[data-slide]')];
 const byId = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
 const overview = byId<HTMLDialogElement>('overview');
@@ -6,6 +9,7 @@ const previous = byId<HTMLButtonElement>('prev');
 const next = byId<HTMLButtonElement>('next');
 const progress = byId('progress');
 let current = 0;
+let presenterChannel: ReturnType<typeof createPresenterChannel> | undefined;
 
 function readHash() {
   const match = location.hash.match(/^#\/(\d+)$/);
@@ -39,6 +43,14 @@ function render(index: number, updateHash = true, focus = false) {
   slides[current + 1]?.querySelectorAll('img').forEach(img => img.loading = 'eager');
   if (focus && !notes.open && !overview.open) slide.focus({ preventScroll: true });
   window.scrollTo({ top: 0, behavior: 'instant' });
+  presenterChannel?.publish();
+}
+
+function showNotes() {
+  if (document.documentElement.classList.contains('presenter-connected')) {
+    byId('presenter-error').hidden = presenterChannel?.open() ?? false;
+  }
+  else toggleDialog(notes);
 }
 
 function toggleDialog(dialog: HTMLDialogElement) {
@@ -62,16 +74,51 @@ function formatTime(seconds: number) { return `${Math.floor(seconds / 60).toStri
 function updateTimer() {
   const seconds = (elapsed + (timerRunning ? performance.now() - startedAt : 0)) / 1000;
   byId('timer').textContent = formatTime(seconds);
-  byId('timer-toggle').classList.toggle('over-time', seconds >= 300);
+  byId('timer-toggle').classList.toggle('over-time', seconds >= 600);
 }
 function toggleTimer() {
   if (timerRunning) elapsed += performance.now() - startedAt;
   else startedAt = performance.now();
   timerRunning = !timerRunning;
   byId('timer-toggle').classList.toggle('running', timerRunning);
-  byId('timer-toggle').setAttribute('aria-label', timerRunning ? 'Pausar cronómetro' : 'Iniciar cronómetro de cinco minutos');
+  byId('timer-toggle').setAttribute('aria-label', timerRunning ? 'Pausar cronómetro' : 'Iniciar cronómetro de diez minutos');
   byId('timer-toggle').setAttribute('aria-pressed', String(timerRunning));
   updateTimer();
+  presenterChannel?.publish();
+}
+
+function resetTimer() {
+  elapsed = 0;
+  startedAt = performance.now();
+  updateTimer();
+  presenterChannel?.publish();
+}
+
+if (!isPreview) {
+  presenterChannel = createPresenterChannel(() => ({
+    index: current,
+    total: slides.length,
+    title: byId('notes-title').textContent ?? '',
+    notes: byId('note-content').textContent ?? '',
+    timing: byId('note-timing').textContent ?? '',
+    nextTitle: slides[current + 1]?.dataset.title ?? '',
+    elapsed: elapsed + (timerRunning ? performance.now() - startedAt : 0),
+    running: timerRunning,
+    capturedAt: Date.now(),
+  }), action => {
+    if (action === 'next') render(current + 1);
+    else if (action === 'previous') render(current - 1);
+    else if (action === 'first') render(0);
+    else if (action === 'last') render(slides.length - 1);
+    else if (action === 'timer') toggleTimer();
+    else if (action === 'reset') resetTimer();
+  }, () => {
+    if (notes.open) notes.close();
+    document.documentElement.classList.add('presenter-connected');
+  });
+  byId('presenter-open').addEventListener('click', () => {
+    byId('presenter-error').hidden = presenterChannel!.open();
+  });
 }
 
 previous.addEventListener('click', () => render(current - 1));
@@ -80,12 +127,12 @@ document.querySelectorAll('[data-next]').forEach(button => button.addEventListen
 document.querySelectorAll('[data-prev]').forEach(button => button.addEventListener('click', () => render(current - 1)));
 document.querySelectorAll<HTMLElement>('[data-go]').forEach(button => button.addEventListener('click', () => { overview.close(); render(Number(button.dataset.go) - 1, true, true); }));
 byId('overview-toggle').addEventListener('click', () => toggleDialog(overview));
-byId('notes-toggle').addEventListener('click', () => toggleDialog(notes));
+byId('notes-toggle').addEventListener('click', showNotes);
 byId('fullscreen').addEventListener('click', fullscreen);
 if (!document.fullscreenEnabled) byId('fullscreen').hidden = true;
 document.addEventListener('fullscreenchange', () => byId('fullscreen').setAttribute('aria-label', document.fullscreenElement ? 'Salir de pantalla completa' : 'Pantalla completa'));
 byId('timer-toggle').addEventListener('click', toggleTimer);
-byId('timer-reset').addEventListener('click', () => { elapsed = 0; startedAt = performance.now(); updateTimer(); });
+byId('timer-reset').addEventListener('click', resetTimer);
 setInterval(updateTimer, 250);
 [overview, notes].forEach(dialog => {
   dialog.querySelector('[data-close]')?.addEventListener('click', () => dialog.close());
@@ -103,7 +150,7 @@ document.addEventListener('keydown', event => {
   else if (key === 'home') { event.preventDefault(); render(0, true, !notes.open); }
   else if (key === 'end') { event.preventDefault(); render(slides.length - 1, true, !notes.open); }
   else if (key === 'f') { event.preventDefault(); void fullscreen(); }
-  else if (key === 'n') { event.preventDefault(); toggleDialog(notes); }
+  else if (key === 'n') { event.preventDefault(); showNotes(); }
   else if (key === 'o') { event.preventDefault(); toggleDialog(overview); }
   else if (key === 't') { event.preventDefault(); toggleTimer(); }
 });

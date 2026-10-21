@@ -5,9 +5,30 @@
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 @media(max-width:700px) and (orientation:portrait){.app-header{height:66px;padding:0 20px}.brand{gap:14px}.brand>span{font-size:8px;letter-spacing:1px}.pitch-label{display:none}.header-actions{gap:10px}.header-actions button>span:last-child{display:none}main{padding:0 12px;display:block}.stage{width:100%;aspect-ratio:auto;min-height:calc(100svh - 134px);overflow:visible;container-type:inline-size}.js .slide{position:relative;inset:auto;aspect-ratio:auto;min-height:calc(100svh - 134px);padding:28px 24px 52px;overflow:hidden}.split,.about,.cta{grid-template-columns:1fr!important;gap:12px;align-content:start}.eyebrow,.cover .eyebrow{font-size:9px;margin:0 0 20px}h1{font-size:clamp(46px,15cqw,72px)}h2,.about h2,.hook h2,.story h2,.finding h2,.tip h2,.cta h2,.integration-slide h2,.results h2{font-size:clamp(28px,8.4cqw,43px);line-height:1.13}.cover .copy{width:100%}.cover .art{position:relative;top:auto;right:auto;width:80%;margin:-4px 0 -12px 22%;z-index:0}.cover-subtitle{font-size:21px;margin-top:20px}.byline{font-size:14px;margin-top:22px}.byline span{font-size:11px;margin-top:4px}.start-button{font-size:12px;padding:12px 20px;margin-top:18px}.start-button span{padding-left:25px}.body-text{font-size:16px;line-height:1.55;max-width:none;margin-top:20px}.aside-line{font-size:15px;margin-top:18px}.lines{max-width:none;margin-top:22px}.lines li{font-size:15px;padding:10px 0}.art{width:85%;max-width:350px;margin:0 auto}.art figcaption{font-size:12px;margin-top:-2px}.slide-footer{left:24px;right:24px;bottom:18px;font-size:9px}.personal-mark{width:210px;margin:15px auto}.personal-mark>span{font-size:90px;letter-spacing:-8px;margin-left:-8px}.personal-mark .mark-arrow{font-size:48px;transform:translateY(8px)}.personal-mark p{font-size:8px;margin-top:15px}.story .art{width:80%;margin-top:-15px}.story .aside-line{font-size:13px}.drama h2{font-size:57px}.drama .art{width:90%;margin:-50px 0 0 20%}.diagnosis{justify-content:center!important}.diagnosis h2{font-size:40px}.scan-result{display:block;margin-top:40px}.scan-code{font-size:12px}.scan-result p{font-size:18px;margin-top:20px}.flow-comparison{grid-template-columns:1fr;gap:32px;margin-top:30px}.diagram-label{font-size:9px;margin-bottom:15px}.tool-row>span{font-size:13px;padding:14px 10px}.tool-row>b{font-size:20px}.interpreter,.control-point{font-size:13px;padding:15px;margin-top:16px}.results-layout{grid-template-columns:1fr;gap:22px;margin-top:30px}.bar-label{font-size:12px}.bar-label strong{font-size:30px}.bar{height:36px;margin-top:7px}.before-bar{margin-bottom:18px}.saved{flex-direction:row;align-items:center;gap:25px}.saved>strong{font-size:110px;letter-spacing:-8px}.saved>strong>span{font-size:45px}.saved>p{font-size:20px}.result-caption{font-size:16px;margin-top:22px}.priorities{margin-top:20px}.priorities li{font-size:19px;gap:18px}.priorities li span{font-size:24px;width:28px}.tips-intro{display:flex!important;flex-direction:column;justify-content:center}.js .tips-intro:not(.active){display:none!important}.tips-intro h2{font-size:45px}.tips-intro .eyebrow{margin-top:0}.big-numbers{position:static;flex-direction:row;font-size:110px;justify-content:space-between;margin-top:55px;line-height:1}.cta-lead{font-size:17px;margin-top:20px}.cta-description{font-size:14px;max-width:none;margin-top:14px}.contact-button{font-size:15px;margin-top:22px;padding:16px 22px;gap:35px}.contact-button span{font-size:20px}.contact-name{font-size:14px;margin-top:22px}.contact-name span{font-size:11px;margin-top:4px}.qr-block{gap:10px;margin:25px 0 12px}.qr-paper{width:220px;padding:12px 12px 20px}.qr-paper p{font-size:16px}.qr-block>a{font-size:12px;margin-top:12px}.qr-destination{font-size:9px}.app-footer{padding:0 16px;height:64px}.chapter,.timer-limit,.footer-left kbd,.footer-separator{display:none}.footer-left{gap:8px}.app-footer nav{gap:7px}.app-footer nav button{width:35px}#slide-counter{font-size:11px;margin-right:3px}.overview-grid{grid-template-columns:1fr 1fr;gap:9px}.overview-grid button{padding:12px;min-height:120px}.overview-grid strong{font-size:13px}dialog{padding:22px}.dialog-heading h2{font-size:22px}#note-content{font-size:18px}}
 
+/* The presenter preview and connected fullscreen show only the public slide. */
+#presenter-open{color:var(--lime);font-weight:750}
+#presenter-error{padding:14px 4vw;color:#ffad89;font-size:14px}
+#note-content{white-space:pre-wrap}
+@media screen{
+  .slide-preview .app-header,.slide-preview .app-footer,.slide-preview .progress-track,.slide-preview dialog,.slide-preview .start-button,
+  .presenter-connected:fullscreen .app-header,.presenter-connected:fullscreen .app-footer,.presenter-connected:fullscreen .progress-track{display:none}
+  .slide-preview main,.presenter-connected:fullscreen main{padding:0;height:100dvh;display:grid;place-items:center}
+  .slide-preview .stage,.presenter-connected:fullscreen .stage{width:min(100vw,calc(100dvh * 16/9));border:0;border-radius:0;box-shadow:none}
+  .slide-preview .slide{animation:none!important}
+}
+@media(max-width:1100px){.pitch-label{display:none}}
+@media(max-width:700px){.brand>span{display:none}#presenter-open{max-width:125px;text-align:left;line-height:1.4}}
+
 /* Personal invoice story replaces the repeated takeaway section. */
+.process-problem h2{font-size:3.7cqw;line-height:1.15}
+.process-takeaway{font-size:3.7cqw;line-height:1.15;font-weight:750;letter-spacing:-.047em;color:var(--lime);margin-top:1.8cqw}
+.participation .copy{padding-top:2cqw}
+.participation h2{font-size:6.2cqw}
+.participation .lines{max-width:70cqw;margin-top:3cqw}
+.participation .lines li{font-size:1.8cqw}
 .personal-case .body-text{color:#555c4e}
 .personal-case h2{font-size:5.5cqw}
+.personal-case .approximation{font-size:2.6cqw;letter-spacing:-.03em}
 .personal-resolution{font-size:1.7cqw;line-height:1.6;margin-top:3cqw;max-width:38cqw}
 .personal-resolution strong{background:var(--lime);padding:.1cqw .5cqw}
 .invoice-flow{display:flex;flex-direction:column;align-items:center;padding:2cqw 1cqw}
@@ -30,7 +51,13 @@
 .invoice-flow figcaption{font-size:1cqw;color:#555c4e;margin-top:1.5cqw}
 #note-content{white-space:pre-line}
 @media(max-width:700px) and (orientation:portrait){
+  .process-problem h2,.process-takeaway{font-size:30px}
+  .process-takeaway{margin-top:18px}
+  .participation h2{font-size:38px}
+  .participation .lines{max-width:none;margin-top:30px}
+  .participation .lines li{font-size:17px}
   .personal-case h2{font-size:38px}
+  .personal-case .approximation{font-size:22px}
   .personal-resolution{font-size:17px;max-width:none;margin-top:22px}
   .personal-resolution strong{padding:1px 5px}
   .invoice-flow{padding:18px 0 0}

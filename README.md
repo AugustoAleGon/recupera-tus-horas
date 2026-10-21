@@ -1,6 +1,6 @@
 # Recupera tus horas
 
-Presentación web de Augusto González: 15 diapositivas en español para un pitch de cinco minutos sobre automatización e IA. Construida con Astro, TypeScript y CSS; tipografía e ilustraciones locales.
+Presentación web de Augusto González: 15 diapositivas en español para una charla de 8–10 minutos con participación de Andrés y del público sobre automatización e IA. Construida con Astro, TypeScript y CSS; tipografía e ilustraciones locales.
 
 ## Ejecutar
 
@@ -33,11 +33,23 @@ La carpeta `dist/` contiene el sitio listo para un alojamiento estático. Los en
 | Iniciar / pausar cronómetro | T |
 | Cerrar un panel | Escape |
 
-También hay botones y navegación por deslizamiento horizontal en móvil. Cada diapositiva tiene un enlace directo, por ejemplo `/#/12`. El cronómetro es manual; las diapositivas no avanzan solas. Las notas se muestran en la misma pantalla: ciérralas durante la proyección si no quieres que el público las vea. Los tiempos sugeridos suman 300 segundos.
+También hay botones y navegación por deslizamiento horizontal en móvil. Cada diapositiva tiene un enlace directo, por ejemplo `/#/12`. El cronómetro es manual; las diapositivas no avanzan solas. Los tiempos sugeridos suman 600 segundos y sirven como referencia para ensayar el guion completo. Reservan 45 segundos para Andrés y 60 segundos para el público; ampliar estas intervenciones requiere abreviar el relato.
+
+### Notas privadas con dos pantallas
+
+1. Configura las pantallas en modo **extendido**, sin duplicarlas.
+2. Pulsa **Vista del presentador ↗**, arriba en la presentación. Si el navegador bloquea la ventana, permite ventanas emergentes para este sitio y vuelve a pulsar el botón.
+3. Deja la nueva ventana con las notas en tu pantalla y mueve la ventana original a la pantalla del público.
+4. En la ventana del público, pulsa **F** para mostrar solo la diapositiva a pantalla completa.
+5. Avanza con **← / →** o los botones desde cualquiera de las dos ventanas. Las notas y la vista previa se actualizan juntas. Puedes controlar el cronómetro desde la vista del presentador con **T**.
+
+La vista del presentador muestra las notas completas, el tiempo sugerido, la diapositiva actual y el título de la siguiente. Puedes recargar cualquiera de las ventanas y vuelven a conectarse; al recargar la presentación se reinicia el cronómetro. Si cierras la vista del presentador, pulsa **N** en la presentación para abrirla otra vez.
+
+Antes de abrir la vista del presentador, **Notas / N** permite consultar las notas sobre la misma diapositiva para ensayar. Una vez abierta la vista privada, **N** lleva a esa ventana y las notas no se superponen a la proyección.
 
 Puedes imprimir las 15 diapositivas o guardarlas como PDF desde el navegador; activa los gráficos de fondo y desactiva los encabezados y pies del navegador.
 
-Los tres hallazgos se desarrollan solo dentro de la historia de Juan. Después aparece el caso personal de Augusto: pasaba horas extrayendo facturas para la declaración de renta y lo resolvió con un agente que extrae los archivos y los comprime en un ZIP. El cierre invita a identificar una tarea propia y solicitar un diagnóstico; no vuelve a enumerar los hallazgos.
+Los tres hallazgos se desarrollan solo dentro de la historia de Juan. Después aparece el caso personal de Augusto: pasaba horas extrayendo facturas para la declaración de renta y lo resolvió con un agente que extrae los archivos y los comprime en un ZIP. Las notas incluyen la intervención de Andrés en la diapositiva 10 y la participación del público en la diapositiva 14 y la reflexión final y el llamado a la acción en la diapositiva 15. El cierre invita a escanear el código QR y comentar la palabra **AI** en el post de Instagram para acceder a un recurso gratuito.
 
 ## Editar
 
@@ -49,7 +61,7 @@ Los tres hallazgos se desarrollan solo dentro de la historia de Juan. Después a
 - `assets/originals/`: originales PNG de las ilustraciones.
 - `assets/prompts-first-batch.json` y `assets/prompts-second-batch.json`: prompts usados con la herramienta integrada de generación de imágenes.
 
-El botón y el QR del cierre apuntan a **https://github.com/AugustoAleGon**, según lo solicitado. El QR se genera durante la compilación a partir del contacto configurado. No se ha configurado un servicio de reservas. La marca personal usa un monograma AG, sin inventar un retrato de Augusto. Juan es un personaje ilustrado; sus resultados se presentan como parte de la historia del pitch.
+El botón y el QR del cierre apuntan a **https://www.instagram.com/reels/DerUMk4BeHG/**. El llamado a la acción es comentar la palabra **AI** en ese post. El QR se genera durante la compilación a partir del contacto configurado. Juan es un personaje ilustrado; sus resultados se presentan como parte de la historia del pitch.
 
 ## Verificar
 

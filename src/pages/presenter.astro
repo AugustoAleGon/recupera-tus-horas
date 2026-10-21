@@ -1,0 +1,45 @@
+---
+import '@fontsource-variable/manrope';
+import '../styles/presenter.css';
+---
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>Vista del presentador — Recupera tus horas</title>
+  </head>
+  <body>
+    <header>
+      <div><p class="eyebrow">SOLO PARA TI</p><h1>Vista del presentador</h1></div>
+      <p id="connection" role="status">Conectando con la presentación…</p>
+    </header>
+    <p class="setup">Deja esta ventana en tu pantalla. Mueve la presentación a la pantalla del público y pulsa <kbd>F</kbd> allí. Usa las pantallas en modo extendido.</p>
+    <main>
+      <section class="preview-panel" aria-label="Diapositiva del público">
+        <div class="section-heading"><h2>En pantalla</h2><span id="counter">— / —</span></div>
+        <iframe id="preview" title="Vista previa de la diapositiva actual" tabindex="-1" inert></iframe>
+        <p class="up-next">A continuación <strong id="next-title">—</strong></p>
+        <div class="timer-panel">
+          <div><p class="eyebrow">TIEMPO TOTAL</p><span id="timer">00:00</span><span class="timer-limit"> / 10:00</span></div>
+          <button id="timer-toggle" data-action="timer" disabled>Iniciar</button>
+          <button data-action="reset" disabled>Reiniciar</button>
+        </div>
+        <p class="shortcuts">← → Cambiar diapositiva · T Iniciar / pausar</p>
+      </section>
+      <section class="notes-panel" aria-labelledby="notes-title">
+        <p class="eyebrow">NOTAS DE ESTA DIAPOSITIVA</p>
+        <h2 id="notes-title">Esperando la presentación</h2>
+        <p id="note-timing"></p>
+        <div id="note-content">Abre esta vista desde el botón «Vista del presentador» de la presentación.</div>
+      </section>
+    </main>
+    <footer>
+      <button id="previous" data-action="previous" disabled>← Anterior</button>
+      <p>Las notas se actualizan al cambiar de diapositiva.</p>
+      <button id="next" data-action="next" disabled>Siguiente →</button>
+    </footer>
+    <script>import '../scripts/presenter';</script>
+  </body>
+</html>

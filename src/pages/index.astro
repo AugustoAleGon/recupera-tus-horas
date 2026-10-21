@@ -15,12 +15,14 @@ const qr = await QRCode.toDataURL(contact.url, { errorCorrectionLevel: 'H', marg
     <meta name="theme-color" content="#101211" />
     <meta name="description" content="Recupera tus horas. Un pitch de Augusto González sobre automatización e inteligencia artificial para desarrolladores y empresas." />
     <title>Recupera tus horas — Augusto González</title>
+    <script is:inline>if (new URLSearchParams(location.search).get('view') === 'preview') document.documentElement.classList.add('slide-preview');</script>
   </head>
   <body>
     <header class="app-header">
       <a href="#/1" class="brand" aria-label="Volver a la portada"><b>ag<span>↗</span></b><span>RECUPERA TUS HORAS</span></a>
-      <div class="header-actions"><span class="pitch-label">UNA CONVERSACIÓN DE 5 MIN</span><button id="overview-toggle" aria-haspopup="dialog" title="Ver diapositivas (O)"><span aria-hidden="true">▦</span> <span>Índice</span></button><button id="fullscreen" aria-label="Pantalla completa" title="Pantalla completa (F)">⛶</button></div>
+      <div class="header-actions"><span class="pitch-label">UNA CONVERSACIÓN DE 8–10 MIN</span><button id="presenter-open" title="Abrir notas privadas en otra ventana">Vista del presentador ↗</button><button id="overview-toggle" aria-haspopup="dialog" title="Ver diapositivas (O)"><span aria-hidden="true">▦</span> <span>Índice</span></button><button id="fullscreen" aria-label="Pantalla completa" title="Pantalla completa (F)">⛶</button></div>
     </header>
+    <p id="presenter-error" role="alert" hidden>No se pudo abrir la vista del presentador. Permite las ventanas emergentes para este sitio y vuelve a pulsar «Vista del presentador».</p>
 
     <main id="deck" aria-label="Presentación: Recupera tus horas">
       <div class="stage">
@@ -30,45 +32,40 @@ const qr = await QRCode.toDataURL(contact.url, { errorCorrectionLevel: 'H', marg
         </Slide>
 
         <Slide number={2} variant="split hook">
-          <div class="copy"><p class="eyebrow">PIENSA EN TU EQUIPO</p><h2>¿Cuántas horas<br />al día <em>pierde<br />tu equipo</em> en tareas que la IA ya podría hacer?</h2><p class="aside-line">Yo también me lo pregunté.</p></div>
+          <div class="copy"><p class="eyebrow">PIENSA EN TU EQUIPO</p><h2>¿Cuánto tiempo <em>pierdes</em> en tareas que la IA podría hacer por ti?</h2><p class="aside-line">Yo también me lo pregunté.</p></div>
           <Art name="team" alt="Equipo trabajando frente a sus pantallas bajo un enorme reloj de arena" />
         </Slide>
 
-        <Slide number={3} variant="about light">
-          <div class="copy"><p class="eyebrow">MUCHO GUSTO</p><h2>Soy Augusto González<br />y te ayudo a<br /><em>recuperar horas.</em></h2><ul class="lines"><li>Para <strong>desarrolladores y empresas</strong> que se pierden entre tantas herramientas.</li><li><strong>Horas de vuelta</strong> cada semana y menos costos operativos.</li><li>Sin convertirte en experto en cada tecnología.</li></ul></div>
-          <div class="personal-mark" aria-label="Monograma de Augusto González"><span>ag<span class="mark-arrow">↗</span></span><p>AUTOMATIZACIÓN<br />CON CRITERIO HUMANO</p></div>
+        <Slide number={3} variant="split story">
+          <div class="copy"><p class="eyebrow">UNA HISTORIA QUE TE PUEDE SONAR</p><h2>Había una vez<br />un empresario<br />llamado<br /><em>Juan Sebastián López.</em></h2><p class="aside-line">Un negocio. Muchas pestañas abiertas.</p></div>
+          <Art name="juan-story" alt="Juan Sebastián López, un empresario ilustrado con gafas y un portátil bajo el brazo" />
         </Slide>
 
-        <Slide number={4} variant="split story">
-          <div class="copy"><p class="eyebrow">UNA HISTORIA QUE TE PUEDE SONAR</p><h2>Había una vez<br />un empresario<br />llamado<br /><em>Juan López.</em></h2><p class="aside-line">Un negocio. Muchas pestañas abiertas.</p></div>
-          <Art name="juan-story" alt="Juan López, un empresario ilustrado con gafas y un portátil bajo el brazo" />
-        </Slide>
-
-        <Slide number={5} variant="split">
+        <Slide number={4} variant="split">
           <div class="copy"><p class="eyebrow">LA HISTORIA DE JUAN</p><h2>El ritual<br /><em>diario de Juan.</em></h2><ul class="lines"><li>Copiar de una plataforma. Pegar en otra.</li><li>Los mismos WhatsApp. Los mismos clientes.</li><li>Revisar el CRM, actualizar la hoja.<br /><strong>Volver a empezar.</strong></li></ul></div>
           <Art name="juan-loop" alt="Juan copiando papeles en una cinta transportadora circular sin fin" caption="Un día más siendo la integración humana." />
         </Slide>
 
-        <Slide number={6} variant="split drama">
+        <Slide number={5} variant="split drama">
           <div class="copy"><h2><span>Cinco</span><span>horas.</span><span>Cada.</span><em>Día.</em></h2></div>
           <Art name="juan-tired" alt="Juan agotado, con la cabeza sobre el escritorio junto a un reloj y una torre de tazas" caption="El café ya está pidiendo café." />
         </Slide>
 
-        <Slide number={7} variant="split">
-          <div class="copy"><h2>Juan no era<br />ineficiente.<br /><em>Era juicioso.</em></h2><p class="body-text">Estaba atrapado en un sistema que lo necesitaba a él para funcionar.</p><p class="aside-line">Y eso lo tenía encadenado.</p></div>
+        <Slide number={6} variant="split process-problem">
+          <div class="copy"><h2>Juan no tenía un problema de falta de esfuerzo.</h2><p class="process-takeaway">Tenía un problema<br />de procesos.</p><p class="body-text">Estaba atrapado en un sistema que dependía completamente de él para funcionar.</p></div>
           <Art name="juan-chained" alt="Juan y su computador unidos por una enorme cadena, como metáfora de dependencia" />
         </Slide>
 
-        <Slide number={8} variant="diagnosis">
+        <Slide number={7} variant="diagnosis">
           <p class="eyebrow">MODO DIAGNÓSTICO</p><h2>Nos sentamos a evaluar<br />su <em>flujo de trabajo.</em></h2><div class="scan-result"><span class="scan-code">[ 03 HALLAZGOS ]</span><p>Y esto encontramos.</p></div><div class="scan-line" aria-hidden="true"></div>
         </Slide>
 
-        <Slide number={9} variant="split finding">
+        <Slide number={8} variant="split finding">
           <div class="copy"><p class="eyebrow">HALLAZGO 01</p><h2>Procesos<br /><em>repetitivos.</em></h2><ul class="lines"><li>Copiar y pegar, una y otra vez.</li><li>El proceso no es malo.<br /><strong>Pero no es eficiente.</strong></li><li>No necesita a Juan para existir.</li></ul></div>
           <Art name="robot" alt="Un robot pequeño mueve documentos mientras la silla de Juan está vacía" caption="El proceso: «Juan, yo puedo solo»." />
         </Slide>
 
-        <Slide number={10} variant="integration-slide">
+        <Slide number={9} variant="integration-slide">
           <p class="eyebrow">HALLAZGO 02</p><h2>Herramientas juntas.<br /><em>Integraciones desconectadas.</em></h2>
           <div class="flow-comparison">
             <div class="flow-before"><p class="diagram-label">ANTES: CADA UNA HABLA OTRO IDIOMA</p><div class="tool-row"><span>Google Ads</span><b aria-hidden="true">×</b><span>CRM</span><b aria-hidden="true">×</b><span>Email</span></div><p class="interpreter">Juan = intérprete manual</p></div>
@@ -76,26 +73,26 @@ const qr = await QRCode.toDataURL(contact.url, { errorCorrectionLevel: 'H', marg
           </div>
         </Slide>
 
-        <Slide number={11} variant="split finding">
+        <Slide number={10} variant="split finding">
           <div class="copy"><p class="eyebrow">HALLAZGO 03</p><h2>Un cuello<br />de botella<br /><em>enorme.</em></h2><ul class="lines"><li>Cada seguimiento esperaba a alguien.</li><li>Sin Juan, no había proceso.</li><li>Para un negocio, <strong>un riesgo enorme.</strong></li></ul></div>
           <Art name="bottleneck" alt="Embudo atascado de tareas con una sola persona intentando liberar la salida" caption="Todo listo. Solo falta Juan. Otra vez." />
         </Slide>
 
-        <Slide number={12} variant="results light">
+        <Slide number={11} variant="results light">
           <p class="eyebrow">EL CAMBIO EN LA HISTORIA DE JUAN</p><h2>De cinco horas diarias <em>a una.</em></h2>
           <div class="results-layout"><div class="bar-chart" role="img" aria-label="Antes: 5 horas diarias. Después: 1 hora de supervisión. 4 horas recuperadas al día."><div class="bar-label"><span>ANTES</span><strong>5 h</strong></div><div class="bar before-bar"></div><div class="bar-label"><span>DESPUÉS</span><strong>1 h</strong></div><div class="bar after-bar"></div></div><div class="saved"><strong>4<span>h</span></strong><p>recuperadas<br />cada día</p></div></div>
           <p class="result-caption">Todo lo demás ocurre solo. <strong>Juan solo supervisa.</strong></p>
         </Slide>
 
-        <Slide number={13} variant="split happy">
+        <Slide number={12} variant="split happy">
           <div class="copy"><p class="eyebrow">TIEMPO PARA LO QUE IMPORTA</p><h2>Juan volvió<br />a hacer crecer<br /><em>su negocio.</em></h2><ul class="priorities"><li><span aria-hidden="true">☏</span> Sus clientes</li><li><span aria-hidden="true">☺</span> Su equipo</li><li><span aria-hidden="true">↗</span> Su estrategia</li></ul></div>
           <Art name="juan-happy" alt="Juan tranquilo y sonriente, con un café, el portátil cerrado y su equipo conversando" />
         </Slide>
 
-        <Slide number={14} variant="split personal-case light">
+        <Slide number={13} variant="split personal-case light">
           <div class="copy">
             <p class="eyebrow">MI EXPERIENCIA · DECLARACIÓN DE RENTA</p>
-            <h2>Yo también<br /><em>perdía horas.</em></h2>
+            <h2>De 5 horas<br /><span class="approximation">a aproximadamente</span><br /><em>1 hora.</em></h2>
             <p class="body-text">Extrayendo, una por una, todas las facturas para mi declaración de renta.</p>
             <p class="personal-resolution">Ahora un agente extrae cada archivo<br />y los comprime en un <strong>ZIP.</strong></p>
           </div>
@@ -109,22 +106,26 @@ const qr = await QRCode.toDataURL(contact.url, { errorCorrectionLevel: 'H', marg
           </figure>
         </Slide>
 
+        <Slide number={14} variant="participation">
+          <div class="copy"><p class="eyebrow">HABLEMOS DE TU DÍA A DÍA</p><h2>¿Qué tarea repites<br />y te gustaría<br /><em>automatizar?</em></h2><ul class="lines"><li>¿Utilizas inteligencia artificial en tu trabajo?</li><li>¿Ya estás utilizando agentes de IA?</li></ul></div>
+        </Slide>
+
         <Slide number={15} variant="cta lime">
-          <div class="copy"><p class="eyebrow">RECUPERA TUS HORAS</p><h2>¿Qué tarea te está<br /><span class="underlined">quitando horas?</span></h2><p class="cta-lead">Si tu equipo pasa más tiempo<br /><strong>operando que creando, hablemos.</strong></p><p class="cta-description">Agenda un diagnóstico gratuito de tu flujo de trabajo. En una sesión identificamos qué automatizar primero y cómo hacerlo sin complicar tu operación.</p><a class="contact-button" href={contact.url} target="_blank" rel="noopener noreferrer">Conecta conmigo <span aria-hidden="true">↗</span></a><p class="contact-name">{contact.name}<span>{contact.role}</span></p></div>
-          <div class="qr-block"><div class="qr-paper"><img src={qr} width="600" height="600" alt="Código QR que abre el perfil de GitHub de AugustoAleGon" /><p>Escanea y conecta</p></div><a href={contact.url} target="_blank" rel="noopener noreferrer">{contact.label}</a><span class="qr-destination">MI PERFIL EN GITHUB</span></div>
+          <div class="copy"><p class="eyebrow">RECUPERA TUS HORAS</p><h2>¿Qué tarea te está<br /><span class="underlined">quitando horas?</span></h2><p class="cta-lead">Escanea el código QR y<br /><strong>comenta “AI” en el post.</strong></p><p class="cta-description">Recibe un recurso gratuito para identificar oportunidades de automatización y mejorar tus flujos de trabajo.</p><a class="contact-button" href={contact.url} target="_blank" rel="noopener noreferrer">Ir al post de Instagram <span aria-hidden="true">↗</span></a><p class="contact-name">{contact.name}<span>{contact.role}</span></p></div>
+          <div class="qr-block"><div class="qr-paper"><img src={qr} width="600" height="600" alt="Código QR que abre el post en Instagram para comentar la palabra AI" /><p>Escanea y comenta “AI”</p></div><a href={contact.url} target="_blank" rel="noopener noreferrer">{contact.label}</a><span class="qr-destination">COMENTA LA PALABRA AI</span></div>
         </Slide>
       </div>
     </main>
 
     <footer class="app-footer">
-      <div class="footer-left"><button id="notes-toggle" aria-haspopup="dialog" title="Notas para presentar (N)">Notas <kbd>N</kbd></button><span class="footer-separator"></span><button id="timer-toggle" aria-label="Iniciar cronómetro de cinco minutos" title="Iniciar o pausar cronómetro (T)"><span aria-hidden="true">◷</span> <span id="timer">00:00</span><span class="timer-limit"> / 05:00</span></button><button id="timer-reset" aria-label="Reiniciar cronómetro" title="Reiniciar cronómetro">↺</button></div>
+      <div class="footer-left"><button id="notes-toggle" aria-haspopup="dialog" title="Notas para presentar (N)">Notas <kbd>N</kbd></button><span class="footer-separator"></span><button id="timer-toggle" aria-label="Iniciar cronómetro de diez minutos" title="Iniciar o pausar cronómetro (T)"><span aria-hidden="true">◷</span> <span id="timer">00:00</span><span class="timer-limit"> / 10:00</span></button><button id="timer-reset" aria-label="Reiniciar cronómetro" title="Reiniciar cronómetro">↺</button></div>
       <span id="chapter" class="chapter">La pregunta</span>
       <nav aria-label="Navegación de diapositivas"><span id="slide-counter">01 <span>/ {slides.length}</span></span><button id="prev" aria-label="Diapositiva anterior" title="Anterior (←)">←</button><button id="next" aria-label="Diapositiva siguiente" title="Siguiente (→)">→</button></nav>
     </footer>
     <div class="progress-track" role="progressbar" aria-label="Progreso de la presentación" aria-valuemin="1" aria-valuemax={slides.length} aria-valuenow="1"><div id="progress"></div></div>
     <p class="sr-only" id="announcement" aria-live="polite" aria-atomic="true"></p>
 
-    <dialog id="overview" aria-labelledby="overview-title"><div class="dialog-heading"><div><p class="eyebrow">{slides.length} DIAPOSITIVAS · 5 MINUTOS</p><h2 id="overview-title">Elige dónde continuar.</h2></div><button data-close aria-label="Cerrar índice">×</button></div><div class="overview-grid">{slides.map((slide, i) => <button data-go={i + 1}><span>{String(i + 1).padStart(2, '0')}</span><strong>{slide.title}</strong><small>{slide.section}</small></button>)}</div><p class="dialog-hint">← → para navegar · F pantalla completa · N notas · T cronómetro · Esc cerrar</p></dialog>
+    <dialog id="overview" aria-labelledby="overview-title"><div class="dialog-heading"><div><p class="eyebrow">{slides.length} DIAPOSITIVAS · 8–10 MINUTOS</p><h2 id="overview-title">Elige dónde continuar.</h2></div><button data-close aria-label="Cerrar índice">×</button></div><div class="overview-grid">{slides.map((slide, i) => <button data-go={i + 1}><span>{String(i + 1).padStart(2, '0')}</span><strong>{slide.title}</strong><small>{slide.section}</small></button>)}</div><p class="dialog-hint">← → para navegar · F pantalla completa · N notas · T cronómetro · Esc cerrar</p></dialog>
     <dialog id="notes" aria-labelledby="notes-title"><div class="dialog-heading"><div><p class="eyebrow">NOTAS PARA PRESENTAR</p><h2 id="notes-title"></h2></div><button data-close aria-label="Cerrar notas">×</button></div><p id="note-timing"></p><p id="note-content"></p><div class="notes-nav"><button data-prev>← Anterior</button><button data-next>Siguiente →</button></div></dialog>
     <noscript><p class="noscript-note">Puedes recorrer las {slides.length} diapositivas desplazándote por la página. Activa JavaScript para usar los controles de presentación.</p></noscript>
     <script>import '../scripts/presentation';</script>
